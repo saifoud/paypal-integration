@@ -11,22 +11,32 @@
             padding: 20px;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            text-align: center;
         }
         #paypal-button-container {
-            text-align: center;
+            background-color: #fff;
+            border: 2px solid #0070ba; /* Bordure bleue autour du conteneur */
+            border-radius: 8px; /* Coins arrondis pour un look moderne */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée pour un effet de profondeur */
+            padding: 20px; /* Espace interne */
+            margin: 0 auto;
+            display: inline-block; /* Pour que la bordure s'ajuste au contenu */
+            max-width: 90vw; /* Largeur maximale en fonction de la vue */
+            width: 100%; /* Pour s'adapter à la largeur de l'écran */
+            box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
         }
-        #paypal-message-container {
-            text-align: center;
-            margin-top: 20px;
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Payer avec PayPal</h2>
+    <h2>Payer avec PayPal</h2>
     <div id="paypal-button-container"></div>
-    <div id="paypal-message-container"></div>
 
     <script>
+        // Configuration des boutons PayPal
         paypal.Buttons({
             createOrder: function(data, actions) {
                 return actions.order.create({
@@ -43,9 +53,6 @@
                 });
             }
         }).render('#paypal-button-container');
-
-        paypal.Messages().render('#paypal-message-container');
     </script>
 </body>
 </html>
-
