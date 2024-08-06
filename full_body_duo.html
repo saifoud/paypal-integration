@@ -227,7 +227,8 @@
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
-                        console.log('Transaction completed successfully by ' + details.payer.name.given_name);
+                        // Redirect to the thank you page after successful transaction
+                        window.location.href = 'https://arekushisus-arts.systeme.io/thanks_full_body_couple';
                     });
                 }
             }).render('#paypal-button-container');
