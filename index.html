@@ -14,7 +14,7 @@
             margin: 0;
             padding: 20px;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #ffffff;
             text-align: center;
         }
         #paypal-button-container {
@@ -23,14 +23,14 @@
             border-radius: 8px; /* Coins arrondis pour un look moderne */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée pour un effet de profondeur */
             padding: 20px; /* Espace interne */
-            margin: 30px auto 0; /* Marge de 10px en haut pour la séparation */
+            margin: 30px auto 0; /* Marge de 30px en haut pour la séparation */
             display: inline-block; /* Pour que la bordure s'ajuste au contenu */
             max-width: 90vw; /* Largeur maximale en fonction de la vue */
             width: 100%; /* Pour s'adapter à la largeur de l'écran */
             box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
         }
         h2 {
-            margin-bottom: 30px; /* Marge inférieure de 10px pour séparer le texte des boutons */
+            margin-bottom: 30px; /* Marge inférieure de 30px pour séparer le texte des boutons */
             color: #333;
             font-family: 'Instrumentsans', sans-serif; /* Utiliser la police spécifiée */
             overflow: hidden; /* Assure que le texte est masqué au début */
@@ -38,11 +38,29 @@
             margin: 0 auto; /* Centre le texte */
             letter-spacing: .15em; /* Espacement entre les lettres */
         }
+        .image-container {
+            margin: 30px auto 0; /* Marge de 30px en haut pour séparer l'image du reste du contenu */
+            width: 80px; /* Largeur fixe du logo */
+            height: 80px; /* Hauteur fixe du logo */
+            display: flex;
+            justify-content: center; /* Centre l'image horizontalement */
+            align-items: center; /* Centre l'image verticalement */
+        }
+        .image-container img {
+            width: 100%; /* L'image prend toute la largeur du conteneur */
+            height: 100%; /* L'image prend toute la hauteur du conteneur */
+            object-fit: cover; /* Conserve les proportions de l'image sans la déformer */
+        }
     </style>
 </head>
 <body>
     <h2>Arekushisu</h2>
     <div id="paypal-button-container"></div>
+
+    <!-- Image ajoutée ici -->
+    <div class="image-container">
+        <img src="arekushisu.jpg" alt="Logo ">
+    </div>
 
     <script>
         // Configuration des boutons PayPal
@@ -79,7 +97,7 @@
             textElement.textContent = ''; // Effacer le contenu du texte pour commencer l'effet de machine à écrire
 
             let index = 0;
-            const typingSpeed = 50; // Vitesse de la frappe en millisecondes
+            const typingSpeed = 100; // Vitesse de la frappe en millisecondes, accélérée
 
             function typeWriter() {
                 if (index < text.length) {
