@@ -210,33 +210,34 @@
     </div>
 
     <script>
-        let baseAmount = 250.00; // Initial amount
-        let amount = baseAmount; // Amount to display
+        let baseAmount = 250.00; // Montant initial
+        let amount = baseAmount; // Montant à afficher
 
-        // Function to set up PayPal buttons
+        // Fonction pour configurer les boutons PayPal
         function setupPayPalButtons() {
             paypal.Buttons({
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: amount.toFixed(2) // Use the updated amount
+                                value: amount.toFixed(2) // Utiliser le montant mis à jour
                             }
                         }]
                     });
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
-                        console.log('Transaction completed successfully by ' + details.payer.name.given_name);
+                        // Rediriger vers la page de remerciement
+                        window.location.href = 'https://arekushisus-arts.systeme.io/thanks_half_body';
                     });
                 }
             }).render('#paypal-button-container');
         }
 
-        // Initialize PayPal buttons
+        // Initialiser les boutons PayPal
         setupPayPalButtons();
 
-        // Add event for the "Colored Version" button
+        // Ajouter un événement pour le bouton "Colored Version"
         document.getElementById('colored-version-button').addEventListener('click', function() {
             const successIcon = document.getElementById('status-icon-success');
             const errorIcon = document.getElementById('status-icon-error');
@@ -244,39 +245,39 @@
             const priceContainer = document.getElementById('price-container');
             const priceAmount = document.getElementById('price-amount');
 
-            // Check if the current amount is the base amount
+            // Vérifier si le montant actuel est le montant de base
             if (amount === baseAmount) {
-                amount = baseAmount + 50.00; // Add $50
+                amount = baseAmount + 50.00; // Ajouter $50
                 successIcon.classList.add('hidden');
                 errorIcon.classList.remove('hidden');
                 statusMessage.textContent = 'Colored Version: Added';
             } else {
-                amount = baseAmount; // Reset to base amount
+                amount = baseAmount; // Réinitialiser au montant de base
                 successIcon.classList.remove('hidden');
                 errorIcon.classList.add('hidden');
                 statusMessage.textContent = 'Colored Version: Not Selected';
             }
 
-            // Update the price amount
+            // Mettre à jour le montant du prix
             priceAmount.textContent = amount.toFixed(2);
 
-            // Re-render PayPal buttons to reflect updated amount
-            document.getElementById('paypal-button-container').innerHTML = ''; // Clear the container
-            setupPayPalButtons(); // Reinitialize PayPal buttons
+            // Re-render les boutons PayPal pour refléter le montant mis à jour
+            document.getElementById('paypal-button-container').innerHTML = ''; // Effacer le conteneur
+            setupPayPalButtons(); // Réinitialiser les boutons PayPal
         });
 
-        // Typewriter effect and reveal of content
+        // Effet de machine à écrire et révélation du contenu
         document.addEventListener("DOMContentLoaded", function() {
             const title = document.getElementById('title');
             const contentContainer = document.getElementById('content-container');
             const titleContainer = document.getElementById('title-container');
 
-            // Typewriter effect
+            // Effet de machine à écrire
             const text = title.textContent;
-            title.textContent = ''; // Clear the text to start the typewriter effect
+            title.textContent = ''; // Effacer le texte pour commencer l'effet de machine à écrire
 
             let index = 0;
-            const typingSpeed = 100; // Typing speed in milliseconds
+            const typingSpeed = 100; // Vitesse de frappe en millisecondes
 
             function typeWriter() {
                 if (index < text.length) {
@@ -284,20 +285,20 @@
                     index++;
                     setTimeout(typeWriter, typingSpeed);
                 } else {
-                    // Delay before starting the zoom-out animation
+                    // Délai avant de commencer l'animation de zoom
                     setTimeout(function() {
                         titleContainer.classList.add('zoom-out');
-                    }, 500); // Adjust delay as needed
+                    }, 500); // Ajuster le délai si nécessaire
                 }
             }
 
-            typeWriter(); // Start the typewriter effect
+            typeWriter(); // Démarrer l'effet de machine à écrire
 
-            // Trigger the zoom-out animation and reveal content
+            // Déclencher l'animation de zoom et révéler le contenu
             titleContainer.addEventListener('animationend', function() {
                 contentContainer.classList.add('show');
-                titleContainer.style.display = 'none'; // Hide the title container after animation
-                document.body.style.overflow = 'auto'; // Ensure overflow is restored
+                titleContainer.style.display = 'none'; // Cacher le conteneur du titre après l'animation
+                document.body.style.overflow = 'auto'; // Assurer que l'overflow est rétabli pour permettre le défilement
             });
         });
     </script>
