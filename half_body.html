@@ -13,7 +13,7 @@
             font-family: Arial, sans-serif;
             background-color: #ffffff;
             text-align: center;
-            overflow: hidden; /* Hide scrollbars during animation */
+            overflow-y: auto; /* Permet le défilement vertical */
         }
         #title-container {
             display: flex;
@@ -31,10 +31,10 @@
             animation: zoomIn 2s ease forwards;
         }
         #content-container {
-            display: none; /* Initially hidden until the zoom-out */
+            max-height: 0; /* Initialement caché */
+            overflow: hidden; /* Masque le contenu débordant */
+            transition: max-height 1s ease, opacity 1s ease; /* Animation fluide */
             opacity: 0;
-            transition: opacity 1s ease, transform 1s ease;
-            transform: scale(0.8);
         }
         @keyframes zoomIn {
             0% {
@@ -55,8 +55,8 @@
             }
         }
         #content-container.show {
-            display: block;
-            animation: zoomOut 1s ease forwards;
+            max-height: 1000px; /* Valeur suffisante pour s'adapter au contenu */
+            opacity: 1;
         }
         #paypal-button-container {
             background-color: #fff;
@@ -257,16 +257,9 @@
                 statusMessage.textContent = 'Colored Version: Not Selected';
             }
 
-            // Trigger underline animation for the entire text
-            priceContainer.classList.remove('underline-animation-mirror');
-            void priceContainer.offsetWidth; // Trigger reflow to reset animation
-
-            // Update the text content
+            // Update the price amount
             priceAmount.textContent = amount.toFixed(2);
 
-            // Reapply the underline animation
-            priceContainer.classList.add('underline-animation-mirror');
-            
             // Re-render PayPal buttons to reflect updated amount
             document.getElementById('paypal-button-container').innerHTML = ''; // Clear the container
             setupPayPalButtons(); // Reinitialize PayPal buttons
@@ -304,6 +297,7 @@
             titleContainer.addEventListener('animationend', function() {
                 contentContainer.classList.add('show');
                 titleContainer.style.display = 'none'; // Hide the title container after animation
+                document.body.style.overflow = 'auto'; // Ensure overflow is restored
             });
         });
     </script>
